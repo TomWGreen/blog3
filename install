@@ -1,0 +1,81 @@
+Create the repo with GitHub desktop - blog3
+Publish the repo - make public
+Laragon - new laravel-skeleton
+Copy the contents of the above folder into the newly created GitHub desktop folder 
+- overwrite all files in destination directory
+
+git add .
+git commit -m "Skeleton scaffolding"
+Note - We are not performing a 'git tag' here, 
+because there would be nothing to see from a front end perspective
+
+composer require laravel/breeze --dev
+php artisan breeze:install
+npm install
+npm run dev
+
+*** This can be done later??? ***
+php artisan migrate
+php artisan db:seed
+
+
+Our app will default to the welcome page. Successful authentication will go to the dashboard.
+Welcome blade to be altered to display list of posts.
+Dashboard to be altered accordingly.
+
+Left this out (routes/web.php) - dashboard to stay as is.
+ Route::get('/', [PostController::class, 'home'])->middleware(['auth'])->name('home');
+
+php artisan make:controller PostController (insert contents)
+
+Leave default authenticated redirection to dashboard as is (app/Providers/RouteServiceProvider.php) - 
+public const HOME = '/dashboard';
+
+php artisan make:migration create_posts_table
+php artisan migrate
+
+php artisan make:model Post (insert contents)
+create post.blade.php (insert contents)
+*** Nothing changed in here - Change Home blade to show contents
+Change Dashboard (previously Home) function in PostController 
+
+Add createForm route to web.php and include in PostController
+
+Create post_form.blade.php for creation/editing
+
+Add link for creating post in navigation bar (layouts.navigation) - under Home
+    <x-nav-link :href="route('post.form')" :active="request()->routeIs('post.form')">
+        {{ __('Create Post') }}
+    </x-nav-link>
+
+Add save route to web.php and include in PostController
+
+Create edit.blade (resources/views/components)
+Update post.blade.php  with edit component
+Add editForm route to web.php and include in PostController
+
+Create delete.blade (resources/views/components)
+Update post.blade.php  with delete component
+Add deleteForm route to web.php and include in PostController
+
+php artisan make:factory PostFactory --model=Post
+Copy contents to PostFactory
+Run seeders - php artisan db:seed
+
+Rating stuff
+============
+composer require  willvincent/laravel-rateable
+php artisan vendor:publish --provider="willvincent\Rateable\RateableServiceProvider" --tag="migrations"
+Left out??? Add to config/app.php         willvincent\Rateable\RateableServiceProvider::class,
+
+Update Post model
+    use Rateable;
+
+php artisan migrate
+
+php artisan make:seeder RatingsSeeder
+Update seeder
+php artisan db:seed
+
+Update post.blade.php
+Update 
