@@ -5,9 +5,10 @@ Copy the contents of the above folder into the newly created GitHub desktop fold
 - overwrite all files in destination directory
 
 git add .
-git commit -m "Skeleton scaffolding"
+git commit -m "feat - Skeleton scaffolding"
 Note - We are not performing a 'git tag' here, 
-because there would be nothing to see from a front end perspective
+not because there would be nothing to see from a front end perspective, 
+but because we do not have anything worth publishing yet
 
 composer require laravel/breeze --dev
 php artisan breeze:install
