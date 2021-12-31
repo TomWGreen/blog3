@@ -15,7 +15,11 @@ php artisan breeze:install
 npm install
 npm run dev
 
-*** This can be done later??? ***
+git add .
+git commit -m "feat - Breeze install"
+
+Update .env & config/database.php
+Update DatabaseSeeder.php to create users
 php artisan migrate
 php artisan db:seed
 
@@ -27,15 +31,20 @@ Dashboard to be altered accordingly.
 Left this out (routes/web.php) - dashboard to stay as is.
  Route::get('/', [PostController::class, 'home'])->middleware(['auth'])->name('home');
 
-php artisan make:controller PostController (insert contents)
+ php artisan make:model Post -mcf
+ Copy contents of model, migration and factory
+ php artisan migrate:fresh
+ Update DatabaseSeeder.php to create posts (include user creation)
+ php artisan db:seed
+*** CONTROLLER *** php artisan make:controller PostController (insert contents)
 
 Leave default authenticated redirection to dashboard as is (app/Providers/RouteServiceProvider.php) - 
 public const HOME = '/dashboard';
 
-php artisan make:migration create_posts_table
+*** MIGRATION *** php artisan make:migration create_posts_table
 php artisan migrate
 
-php artisan make:model Post (insert contents)
+*** MODEL *** php artisan make:model Post (insert contents)
 create post.blade.php (insert contents)
 *** Nothing changed in here - Change Home blade to show contents
 Change Dashboard (previously Home) function in PostController 
@@ -59,7 +68,7 @@ Create delete.blade (resources/views/components)
 Update post.blade.php  with delete component
 Add deleteForm route to web.php and include in PostController
 
-php artisan make:factory PostFactory --model=Post
+*** FACTORY *** php artisan make:factory PostFactory --model=Post
 Copy contents to PostFactory
 Run seeders - php artisan db:seed
 
