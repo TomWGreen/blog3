@@ -37,24 +37,25 @@ class PostController extends Controller
      */
     public function save(Request $request) {
         $validated = $request->validate([
-          //'id' in the case where we are editing the post
-          'id' => 'nullable|exists:posts,id',
-          'title' => 'required|min:1',
-          'content' => 'required|min:1'
+            //'id' in the case where we are editing the post
+            'id' => 'nullable|exists:posts,id',
+            'title' => 'required|min:1',
+            'content' => 'required|min:1'
         ]);
     
         $user = Auth::user();
         $id = $request->get('id');
-    
-        // Check if the post belongs to this user
+        //dd($request);
+        //dd($id);
+        // if the post does not belong to this user, redirect back to the dashboard without applying the change
         if ($id) {
-          $post = Post::query()->find($id);
-          if ($post->user->_id !== $user->_id) {
-            return redirect()->route('dashboard');
+            $post = Post::query()->find($id);
+            if ($post->user->_id !== $user->_id) {
+              return redirect()->route('dashboard');
           }
         } else {
-          $post = new Post();
-          $post->user()->associate($user);
+            $post = new Post();
+            $post->user()->associate($user);
         }
     
         $post->title = $request->get('title');
@@ -70,8 +71,10 @@ class PostController extends Controller
      */
     public function editForm(Request $request, $id) {
         $post = Post::query()->find($id);
+        //dd($id);
+        //Only allow editing of existing posts
         if (!$post) {
-          return redirect()->route('dashboard');
+            return redirect()->route('dashboard');
         }
         return view('post_form', ['post' => $post]);
     }
@@ -81,7 +84,7 @@ class PostController extends Controller
      */
     public function delete(Request $request) {
         $validated = $request->validate([
-          'id' => 'exists:posts,id'
+            'id' => 'exists:posts,id'
         ]);
     
         $post = Post::query()->find($request->get('id'));

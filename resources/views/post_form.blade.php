@@ -1,8 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ isset($post) ? __('Edit Post') : __('Create Post') }}
-        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -21,11 +18,11 @@
                     <form method="POST" action="{{ route('post.save') }}">
                         @csrf
                         @if (isset($post))
-                            <input type="hidden" name="id" value="{{ $post->_id }}" />
+                            <input type="hidden" name="id" value="{{ $post->id }}" />
                         @endif
                         <div>
                             <x-label for="title" :value="__('Title')" />
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title') ?: (isset($post) ? $post->title : '')" required autofocus />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title') ?: (isset($post) ? $post->title : '')" autofocus />
                         </div>
                         <div class="mt-3">
                             <x-label for="content" :value="__('Content')" />
