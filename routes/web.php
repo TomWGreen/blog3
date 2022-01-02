@@ -16,8 +16,14 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', [PostController::class, 'welcome']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/posts/create', [PostController::class, 'createForm'])->middleware(['auth'])->name('post.form');
+
+Route::get('/dashboard', [PostController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+
+Route::post('/posts/create', [PostController::class, 'save'])->middleware(['auth'])->name('post.save');
+
+Route::get('/posts/{id}/edit', [PostController::class, 'editForm'])->middleware(['auth'])->name('post.edit.form');
+
+Route::post('/posts/delete', [PostController::class, 'delete'])->middleware(['auth'])->name('post.delete');
 
 require __DIR__.'/auth.php';

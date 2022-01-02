@@ -45,11 +45,19 @@ public const HOME = '/dashboard';
 php artisan migrate
 
 *** MODEL *** php artisan make:model Post (insert contents)
-create post.blade.php (insert contents)
-*** Nothing changed in here - Change Home blade to show contents
-Change Dashboard (previously Home) function in PostController 
+create post-guest.blade.php
+NOTE - Update this with the rating later
+Update PostController with welcome
+Update web.php
 
-Add createForm route to web.php and include in PostController
+git add .
+git commit -m "feat - Guest welcome page"
+git tag -a v1.0.0 -m "Version 1.0.0"
+
+create edit/delete blade components
+create post-auth.blade.php
+Update PostController
+Add routes to web.php
 
 Create post_form.blade.php for creation/editing
 
@@ -58,19 +66,21 @@ Add link for creating post in navigation bar (layouts.navigation) - under Home
         {{ __('Create Post') }}
     </x-nav-link>
 
-Add save route to web.php and include in PostController
-
-Create edit.blade (resources/views/components)
-Update post.blade.php  with edit component
-Add editForm route to web.php and include in PostController
-
-Create delete.blade (resources/views/components)
-Update post.blade.php  with delete component
-Add deleteForm route to web.php and include in PostController
-
 *** FACTORY *** php artisan make:factory PostFactory --model=Post
 Copy contents to PostFactory
 Run seeders - php artisan db:seed
+
+composer require --dev laravel/dusk
+php artisan dusk:install
+
+git add .
+git commit -m "feat - CRUD blog"
+
+Testing stuff
+
+git add .
+git commit -m "test - CRUD blog"
+git tag -a v1.1.0 -m "Version 1.1.0"
 
 Rating stuff
 ============
@@ -87,5 +97,12 @@ php artisan make:seeder RatingsSeeder
 Update seeder
 php artisan db:seed
 
-Update post.blade.php
-Update 
+Update post-auth.blade.php & post-guest.blade.php with post rating (between title & content)
+Update post-auth.blade.php with user post rating section
+
+
+
+Nice to haves:
+1) List posts by creation date descending
+2) 404
+3) Delete confirmation? Maybe
