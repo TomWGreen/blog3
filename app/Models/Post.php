@@ -8,7 +8,7 @@ use willvincent\Rateable\Rateable;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Rateable;
 
     protected $fillable = [
         'title',

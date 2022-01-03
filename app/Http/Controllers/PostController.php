@@ -93,4 +93,13 @@ class PostController extends Controller
         return redirect()->route('dashboard');
     }
     
+    public function saveRating(Request $request)
+    {
+        request()->validate(['rate' => 'required']);
+        $post = Post::find($request->id);
+
+		$post->rate($request->rate);
+
+        return redirect()->route('dashboard');
+    }
 }
