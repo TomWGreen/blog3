@@ -66,7 +66,7 @@ class BlogTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1)
                     ->visit('/posts/1/edit')
-                    ->waitForText('Edit Post')
+                    ->waitForText('SAVE')
                     ->assertSee('SAVE');
         });
     }
