@@ -98,7 +98,7 @@ class PostController extends Controller
         request()->validate(['rate' => 'required']);
         $post = Post::find($request->id);
 
-		$post->rate($request->rate);
+		$post->rateOnce($request->rate);
 
         return redirect()->route('dashboard');
     }
