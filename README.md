@@ -14,4 +14,6 @@ A blog, with authentication and a rating system, scaffolded by Laravel
 ## Test suite
 -   Seed dummy data: `php artisan db:seed`
 -   Execute test suite: `php artisan dusk`
+-   In the case where the chrome binary is not found: `php artisan dusk:chrome-driver`
+
 
