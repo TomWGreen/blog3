@@ -3,7 +3,7 @@ A blog, with authentication and a rating system, scaffolded by Laravel
 
 ## Installation instructions
 -   Clone this repository: `git clone https://github.com/TomWGreen/blog3.git`
--   Shift focus: `cd blog1/`
+-   Shift focus: `cd blog3/`
 -   Install the dependencies: `composer install`
 -   Create a new database & create/update the `.env` file accordingly
 -   Generate an encryption key `php artisan key:generate`
